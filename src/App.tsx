@@ -2,14 +2,14 @@ import './App.css'
 import Header from './Header'
 import Library from './pages/Library'
 
-function App() {
+export default function App() {
 
   return (
     <>
       <Header />
-      <Library />
+      <section className='flex justify-center'>
+        <Library />
+      </section>
     </>
   )
 }
-
-export default App
