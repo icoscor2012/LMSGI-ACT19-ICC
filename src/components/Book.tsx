@@ -1,13 +1,12 @@
 
 
 interface IProps {
-    ISBN: number
-    title: string
-    author: string
-    published: string
-    cover: string
-    status: boolean
-    category: "Acción" | "Comedia" | "Tragedia"
+    title: string,
+    author: string,
+    published: string,
+    cover: string,
+    status: boolean,
+    category: string
 }
 
 export default function Book(props: IProps) {
@@ -24,7 +23,7 @@ export default function Book(props: IProps) {
                 />
             </div>
 
-            <div className="p-4 leading-7">
+            <div className="p-5 w-full leading-7">
                 <h3 className="font-medium text-xl my-1">{props.title}</h3>
                 <p>{props.author}</p>
                 <p className="text-gray-500">Publicado: {props.published}</p>
