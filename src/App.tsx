@@ -172,9 +172,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <section className='flex justify-center'>
-        <Library books={books}/>
-      </section>
+      <Library books={books}/>
     </>
   )
 }
