@@ -5,5 +5,6 @@ export default interface IBook {
     published: string,
     cover: string,
     status: boolean,
-    category: string
+    category?: string,
+    isFavorite?: boolean
 }
