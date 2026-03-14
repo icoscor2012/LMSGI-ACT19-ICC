@@ -8,16 +8,15 @@ interface IProps {
 
 export default function Book({ book }: IProps) {
 
-    // Estado del libro (leído | pendiente)
     const [status, setStatus] = useState(book.status)
-
+    const [statusFav, setStatusFav] = useState(book.isFavorite || false)
+    
+    // Estado del libro (leído | pendiente)
     function toggleStatus() {
         setStatus(!status)
     }
 
     // Estado isFavorite
-    const [statusFav, setStatusFav] = useState(book.isFavorite || false)
-
     function toggleFavorite() {
         setStatusFav(!statusFav)
     }
