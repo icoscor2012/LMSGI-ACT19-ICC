@@ -1,11 +1,14 @@
 import Book from "../components/Book"
 import type IBook from "../types/Interfaces"
+import { useEffect } from "react"
 
 interface IProps {
     books: IBook[]
 }
 
 export default function Library({ books }: IProps) {
+
+    const pages = 0;
 
     return (
         <>
@@ -18,9 +21,9 @@ export default function Library({ books }: IProps) {
                 </div>
 
                 <div className="mt-10 mb-20 flex flex-row text-xl justify-center">
-                    <button className="bg-gray-300 rounded-xl px-4 py-3 hover:bg-gray-400">Anterior</button>
+                    <button className="bg-gray-300 rounded-xl px-4 py-3 hover:bg-gray-400 cursor-pointer">Anterior</button>
                     <p className="px-4 py-3">paginas</p>
-                    <button className="bg-gray-300 rounded-xl px-4 py-3 hover:bg-gray-400">Siguiente</button>
+                    <button className="bg-gray-300 rounded-xl px-4 py-3 hover:bg-gray-400 cursor-pointer">Siguiente</button>
                 </div>
             </div>
         </>
