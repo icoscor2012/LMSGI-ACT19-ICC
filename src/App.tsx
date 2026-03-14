@@ -8,9 +8,9 @@ export default function App() {
   const books: IBook[] = [
     {
         ISBN: 1,
-        title: "El Cuarto Mono",
-        author: "J. D. Barker",
-        published: "27/06/2017",
+        title: "Mi lucha",
+        author: "Pintor austriaco",
+        published: "19/06/1925",
         cover: "https://m.media-amazon.com/images/I/71b2Mr1ea8L._AC_UF894,1000_QL80_.jpg",
         status: true,
         category: "Acción",
