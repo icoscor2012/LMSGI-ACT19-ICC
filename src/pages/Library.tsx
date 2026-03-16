@@ -24,15 +24,31 @@ export default function Library({ books }: IProps) {
         setCurrentPage(currentPage - 1)
     }
 
+    // Efecto de carga
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        setIsLoading(true)
+        const timer = setTimeout(() => setIsLoading(false), 400)
+
+        return () => clearTimeout(timer)
+    }, [currentPage])
+
     return (
         <>
             <div className="flex flex-col">
 
-                <div className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {currentBooks.map((b) =>
-                        <Book key={b.ISBN} book={b} />
-                    )}
-                </div>
+                {(isLoading) ? (
+                    <div id="loader" className="flex items-center justify-center">
+                        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                ) : (
+                    <div className="mb-10 grid grid-cols-1 gap-5 justify-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {currentBooks.map((b) =>
+                            <Book key={b.ISBN} book={b} />
+                        )}
+                    </div>
+                )}
 
                 <div className="flex justify-center">
                     <div className="mt-10 w-60 mb-20 text-xl grid grid-cols-3 justify-items-center items-center">
