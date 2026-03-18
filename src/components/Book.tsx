@@ -14,11 +14,13 @@ export default function Book({ book }: IProps) {
     // Estado del libro (leído | pendiente)
     function toggleStatus() {
         setStatus(!status)
+        book.status = !book.status
     }
-
+    
     // Estado isFavorite
     function toggleFavorite() {
         setStatusFav(!statusFav)
+        book.isFavorite = !book.isFavorite
     }
 
     return (

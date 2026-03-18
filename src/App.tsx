@@ -5,7 +5,8 @@ import type IBook from './types/Interfaces'
 
 export default function App() {
 
-    /*  const books: IBook[] = [
+    /*
+    const books: IBook[] = [
         {
             ISBN: 1,
             title: "Mi lucha",
@@ -166,7 +167,8 @@ export default function App() {
             category: "Fantasía",
             isFavorite: false
         }
-    ];*/
+    ];
+    */
 
     const books: IBook[] = Array.from({ length: 16 }, (_, i) => ({
         ISBN: i + 1,
