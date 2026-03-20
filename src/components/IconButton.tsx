@@ -7,7 +7,7 @@ interface IProps {
 
 export default function IconButton({status, callback}: IProps) {
 
-    let color = (status) ? "text-amber-400" : "text-gray-400"
+    const color = (status) ? "text-amber-400" : "text-gray-400"
 
     return (
         <button onClick={callback} className={`cursor-pointer ${color}`}>
