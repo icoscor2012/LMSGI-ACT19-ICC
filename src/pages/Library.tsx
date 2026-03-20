@@ -1,6 +1,6 @@
 import Book from "../components/Book"
 import type IBook from "../types/Interfaces"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
 interface IProps {
     books: IBook[]
@@ -8,19 +8,49 @@ interface IProps {
 
 export default function Library({ books }: IProps) {
 
+    // Filtrado por estado
+    const [filteredBooks, setFilteredBooks] = useState(books)
+    const [stateFilter, setStateFilter] = useState('')
+
+    const handleStatusFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value
+        setStateFilter(value)
+
+        if (stateFilter === 'leidos') setFilteredBooks(books.filter((b) => b.status))
+        else if (stateFilter === 'pendientes') setFilteredBooks(books.filter((b) => !b.status))
+        else setFilteredBooks(books)
+
+        setCurrentPage(1)
+    }
+
+    // Filtrar por texto
+    const [textFilter, setTextFilter] = useState('')
+
+    const handleTextFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value
+        setTextFilter(value)
+
+        filteredBooks.filter((b) => {
+            b.title.toLowerCase().includes(value)
+            console.log(b.title.toLowerCase().includes(value))
+        })
+        
+        setCurrentPage(1)
+    }
+
     // Paginacion
     const [currentPage, setCurrentPage] = useState(1)
     const booksPerPage = 4
     const indexOfLastItem = currentPage * booksPerPage
     const indexOfFirstItem = indexOfLastItem - booksPerPage
-    const currentBooks: IBook[] = books.slice(indexOfFirstItem, indexOfLastItem)
-    const totalPages = Math.ceil(books.length / booksPerPage)
+    const currentBooks = filteredBooks.slice(indexOfFirstItem, indexOfLastItem)
+    const totalPages = Math.ceil(filteredBooks.length / booksPerPage)
 
-    function nextPage() {
+    const nextPage = () => {
         setCurrentPage(currentPage + 1)
     }
 
-    function previousPage() {
+    const previousPage = () => {
         setCurrentPage(currentPage - 1)
     }
 
@@ -32,29 +62,29 @@ export default function Library({ books }: IProps) {
         const timer = setTimeout(() => setIsLoading(false), 400)
 
         return () => clearTimeout(timer)
-    }, [currentPage])
-
-    // Filtrar por texto
+    }, [currentPage, stateFilter, textFilter])
 
     return (
         <>
-            <div className="flex flex-col w-">
-                <form className="my-10">
+            <div className="flex flex-col">
+                <form className="my-5">
                     <h3 className="text-3xl py-2">Filtrar por estado</h3>
                     <label>
-                        <input type="radio" name="myRadio" value="todos" />
+                        <input type="radio" name="filtrarEstado" value="todos" defaultChecked={true} className="mx-2" onChange={handleStatusFilter} />
                         Mostrar todos
                     </label>
                     <label>
-                        <input type="radio" name="myRadio" value="leidos" />
+                        <input type="radio" name="filtrarEstado" value="leidos" className="mx-2" onChange={handleStatusFilter} />
                         Mostrar leídos
                     </label>
                     <label>
-                        <input type="radio" name="myRadio" value="pendientes" />
+                        <input type="radio" name="filtrarEstado" value="pendientes" className="mx-2" onChange={handleStatusFilter} />
                         Mostrar pendientes
                     </label>
                     <h3 className="text-3xl py-2">Filtrar por texto</h3>
-                    <input name="filtradoTexto" type="text" className="text-xl px-3 h-15 border-2 rounded-xl w-full" placeholder="Nombre del libro" />
+                    <label>
+                        <input name="filtradoTexto" type="text" className="bg-white text-xl px-3 h-15 border-2 rounded-xl w-full" placeholder="Nombre del libro" onChange={handleTextFilter}/>
+                    </label>
                 </form>
 
                 {(isLoading) ? (
@@ -74,7 +104,7 @@ export default function Library({ books }: IProps) {
                         <div className="w-[144]">
                             {
                                 (currentPage === 1) ? '' :
-                                    <button onClick={previousPage} className="bg-gray-300 rounded-xl px-4 py-2 hover:bg-gray-400 cursor-pointer">
+                                    <button onClick={previousPage} className="bg-gray-400 rounded-xl px-4 py-2 hover:bg-gray-500 cursor-pointer">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" /></svg>
                                     </button>
                             }
@@ -85,7 +115,7 @@ export default function Library({ books }: IProps) {
                         <div className="w-fit">
                             {
                                 (currentPage === totalPages) ? '' :
-                                    <button onClick={nextPage} className="bg-gray-300 rounded-xl px-4 py-2 hover:bg-gray-400 cursor-pointer">
+                                    <button onClick={nextPage} className="bg-gray-400 rounded-xl px-4 py-2 hover:bg-gray-500 cursor-pointer">
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
                                     </button>
                             }
