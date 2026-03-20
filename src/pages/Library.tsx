@@ -13,7 +13,7 @@ export default function Library({ books }: IProps) {
     const booksPerPage = 4
     const indexOfLastItem = currentPage * booksPerPage
     const indexOfFirstItem = indexOfLastItem - booksPerPage
-    const currentBooks = books.slice(indexOfFirstItem, indexOfLastItem)
+    const currentBooks: IBook[] = books.slice(indexOfFirstItem, indexOfLastItem)
     const totalPages = Math.ceil(books.length / booksPerPage)
 
     function nextPage() {
@@ -34,9 +34,28 @@ export default function Library({ books }: IProps) {
         return () => clearTimeout(timer)
     }, [currentPage])
 
+    // Filtrar por texto
+
     return (
         <>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-">
+                <form className="my-10">
+                    <h3 className="text-3xl py-2">Filtrar por estado</h3>
+                    <label>
+                        <input type="radio" name="myRadio" value="todos" />
+                        Mostrar todos
+                    </label>
+                    <label>
+                        <input type="radio" name="myRadio" value="leidos" />
+                        Mostrar leídos
+                    </label>
+                    <label>
+                        <input type="radio" name="myRadio" value="pendientes" />
+                        Mostrar pendientes
+                    </label>
+                    <h3 className="text-3xl py-2">Filtrar por texto</h3>
+                    <input name="filtradoTexto" type="text" className="text-xl px-3 h-15 border-2 rounded-xl w-full" placeholder="Nombre del libro" />
+                </form>
 
                 {(isLoading) ? (
                     <div id="loader" className="flex items-center justify-center">
