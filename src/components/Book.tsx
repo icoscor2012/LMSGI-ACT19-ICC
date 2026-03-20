@@ -24,7 +24,7 @@ export default function Book({ book }: IProps) {
     }
 
     return (
-        <article className="w-75 shadow-2xl/30 place-items-center rounded-lg overflow-hidden hover:-translate-y-2 hover:shadow-2xl/50 duration-300 group">
+        <article className="bg-white w-75 shadow-2xl/30 place-items-center rounded-lg overflow-hidden hover:-translate-y-2 hover:shadow-2xl/50 duration-300 group">
             <div className="h-64 overflow-hidden">
                 <img
                     className="w-100 h-full object-cover transition-transform duration-500 group-hover:scale-110"
